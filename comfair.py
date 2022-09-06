@@ -15,6 +15,21 @@ master.set_verbose(True)
 
 evm_velocity = 3
 temp_set = 26
+comf_set = 1
+
+def on_connect(client, userdata, flags, rc):
+    print("Connected with result code"+str(rc))
+    client.subscribe('v1/devices/me/rpc/request/+',1)
+    time.sleep(3)
+
+def on_message(client, userdata, msg):
+    global comf_set
+    data_topic = msg.topic
+    data_payload = json.loads(msg.payload.decode())
+    print(data_payload)
+    comf_set = data_payload['params']
+    #j = json.loads(data)
+    listtopic = data_topic.split("/") 
 
 def Fan_init_speed():
     for i in range (1,5):
@@ -105,11 +120,11 @@ def comfort_defin(temp,humi,velocity):
     
 def set_speed(temp,humi):
     global evm_velocity
-    
+    global comf_set
     sequences = [0, 1, 2, 3, 4, 5]
     for i in sequences:
         test = comfort_defin(temp,humi,i)
-        if test[1] <= 1:
+        if test[1] <= comf_set:
             velocity = i
             break
         else:
@@ -126,6 +141,20 @@ def set_speed(temp,humi):
 if __name__ == '__main__':
     
     Fan_speed(3)
+    meter_token = 'IZcJiw4YcQFvDyBno9pd'
+    meter_pass = ''
+    url = 'thingsboard.cloud'
+
+    client01 = mqtt.Client()
+    client01.on_connect = on_connect
+    client01.on_message = on_message
+    client01.username_pw_set(meter_token, meter_pass)
+    client01.connect(url, 1883, 60)
+    client01.loop_forever()
+
+    client02 = mqtt.Client()
+    client02.username_pw_set("IZcJiw4YcQFvDyBno9pd","xxxx")
+    client02.connect("thingsboard.cloud", 1883, 60)
     
     while True:
         RTcond = get_temp()
