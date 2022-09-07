@@ -175,42 +175,44 @@ def job():
     time.sleep(1)
     
     if evm_velocity > 3:
-        temp_set = temp_set - 1
-        if temp_set == 20:
-            AC_20()
-        elif temp_set == 21:
-            AC_21()
-        elif temp_set == 22:
-            AC_22()
-        elif temp_set == 23:
-            AC_23()
-        elif temp_set == 24:
-            AC_24()
-        elif temp_set == 25:
-            AC_25()
-        elif temp_set == 26:
-            AC_26()
-        elif temp_set == 27:
-            AC_27()
+        if temp_set >= 20 :
+            temp_set = temp_set - 1
+            if temp_set == 20:
+                AC_20()
+            elif temp_set == 21:
+                AC_21()
+            elif temp_set == 22:
+                AC_22()
+            elif temp_set == 23:
+                AC_23()
+            elif temp_set == 24:
+                AC_24()
+            elif temp_set == 25:
+                AC_25()
+            elif temp_set == 26:
+                AC_26()
+            elif temp_set == 27:
+                AC_27()
             
     if evm_velocity < 2:
-        temp_set = temp_set + 1
-        if temp_set == 20:
-            AC_20()
-        elif temp_set == 21:
-            AC_21()
-        elif temp_set == 22:
-            AC_22()
-        elif temp_set == 23:
-            AC_23()
-        elif temp_set == 24:
-            AC_24()
-        elif temp_set == 25:
-            AC_25()
-        elif temp_set == 26:
-            AC_26()
-        elif temp_set == 27:
-            AC_27()
+        if temp_set <= 27 :
+            temp_set = temp_set + 1
+            if temp_set == 20:
+                AC_20()
+            elif temp_set == 21:
+                AC_21()
+            elif temp_set == 22:
+                AC_22()
+            elif temp_set == 23:
+                AC_23()
+            elif temp_set == 24:
+                AC_24()
+            elif temp_set == 25:
+                AC_25()
+            elif temp_set == 26:
+                AC_26()
+            elif temp_set == 27:
+                AC_27()
     print (temp_set)
 
 def job_pre():
