@@ -47,7 +47,7 @@ def on_message(client, userdata, msg):
 
 
 def Fan_on():
-    master.execute(1, cst.WRITE_MULTIPLE_REGISTERS, 1103,output_value=(0, 1))
+    master.execute(1, cst.WRITE_MULTIPLE_REGISTERS, 1103,output_value=(1, 1))
     time.sleep(1)
 
 def Fan_init_speed():
