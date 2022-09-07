@@ -223,7 +223,7 @@ if __name__ == '__main__':
     
     
 
-    t = threading.Thread(target = job)
+    t = threading.Thread(target = job_pre)
     t.start()
     
     Fan_speed(3)
