@@ -20,6 +20,8 @@ master.set_verbose(True)
 evm_velocity = 3
 temp_set = 26
 comf_set = 1
+evm_temp = 25
+evm_humi = 60
 
 def on_connect(client, userdata, flags, rc):
     print("Connected with result code"+str(rc))
@@ -34,6 +36,8 @@ def on_message(client, userdata, msg):
     comf_set = data_payload['params']
     #j = json.loads(data)
     listtopic = data_topic.split("/") 
+
+
 
 def Fan_init_speed():
     for i in range (1,5):
@@ -79,10 +83,13 @@ def AC_27():
     time.sleep(1)
     
 def get_temp():
+    global evm_temp,evm_humi
     temp = master.execute(2, cst.READ_HOLDING_REGISTERS, 1090, 4) 
     time.sleep(0.5)
     RTtemp = round(temp[0]*0.01-1,2)
     RThumi = round(temp[3]*0.01,2)
+    evm_temp = RTtemp
+    evm_humi = RThumi
     return RTtemp,RThumi
 
 def comfort_cal(temp,humi,volcity):
@@ -166,6 +173,9 @@ if __name__ == '__main__':
         print (num_comfort)
         print (RTcond)
         print (set_speed(RTcond[0],RTcond[1]))
+        payload = {'Temperature' : evm_temp, 'Humidity':evm_humi}
+        client01.publish("v1/devices/me/telemetry", json.dumps(payload))
+
         time.sleep(5)
     
         if evm_velocity > 3:
