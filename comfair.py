@@ -199,7 +199,7 @@ def set_speed(temp,humi):
     if velocity != evm_velocity :
         Fan_speed(velocity)
     evm_velocity = velocity
-    evm_comfort = test[2]
+    evm_comfort = test[1]
     
     
         
