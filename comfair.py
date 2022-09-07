@@ -179,40 +179,56 @@ def job():
             temp_set = temp_set - 1
             if temp_set == 20:
                 AC_20()
+                time.sleep(1)
             elif temp_set == 21:
                 AC_21()
+                time.sleep(1)
             elif temp_set == 22:
                 AC_22()
+                time.sleep(1)
             elif temp_set == 23:
                 AC_23()
+                time.sleep(1)
             elif temp_set == 24:
                 AC_24()
+                time.sleep(1)
             elif temp_set == 25:
                 AC_25()
+                time.sleep(1)
             elif temp_set == 26:
                 AC_26()
+                time.sleep(1)
             elif temp_set == 27:
                 AC_27()
+                time.sleep(1)
             
     if evm_velocity < 2:
         if temp_set <= 27 :
             temp_set = temp_set + 1
             if temp_set == 20:
                 AC_20()
+                time.sleep(1)
             elif temp_set == 21:
                 AC_21()
+                time.sleep(1)
             elif temp_set == 22:
                 AC_22()
+                time.sleep(1)
             elif temp_set == 23:
                 AC_23()
+                time.sleep(1)
             elif temp_set == 24:
                 AC_24()
+                time.sleep(1)
             elif temp_set == 25:
                 AC_25()
+                time.sleep(1)
             elif temp_set == 26:
                 AC_26()
+                time.sleep(1)
             elif temp_set == 27:
                 AC_27()
+                time.sleep(1)
     print (temp_set)
 
 def job_pre():
@@ -223,8 +239,6 @@ def job_pre():
 
 if __name__ == '__main__':
     
-    AC_21()
-    '''
     t = threading.Thread(target = job_pre)
     t.start()
     
@@ -243,4 +257,4 @@ if __name__ == '__main__':
     client02 = mqtt.Client()
     client02.username_pw_set("IZcJiw4YcQFvDyBno9pd","xxxx")
     client02.connect("thingsboard.cloud", 1883, 60)
-    '''
+    
