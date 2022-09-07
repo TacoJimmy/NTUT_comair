@@ -42,7 +42,7 @@ def on_message(client, userdata, msg):
     print (RTcond)
     print (set_speed(RTcond[0],RTcond[1]))
     payload = {'Temperature' : evm_temp, 'Humidity':evm_humi}
-    client02.publish("v1/devices/me/telemetry", json.dumps(payload))
+    client01.publish("v1/devices/me/telemetry", json.dumps(payload))
 
     time.sleep(5)
     
