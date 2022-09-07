@@ -211,7 +211,7 @@ def job():
             AC_26()
         elif temp_set == 27:
             AC_27()
-    
+    print (temp_set)
 
 def job_pre():
     schedule.every(5).seconds.do(job)
