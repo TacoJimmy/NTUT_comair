@@ -5,6 +5,7 @@ from modbus_tk import modbus_rtu
 import paho.mqtt.client as mqtt
 import json  
 import threading
+import schedule
 
 '''
 @author: NTUT
@@ -210,9 +211,16 @@ def job():
             AC_26()
         elif temp_set == 27:
             AC_27()
-    time.sleep(5)
+    
+
+def job_pre():
+    schedule.every(5).seconds.do(job)
+    while True:
+        schedule.run_pending()  
+        time.sleep(1)
 
 if __name__ == '__main__':
+    
     
 
     t = threading.Thread(target = job)
