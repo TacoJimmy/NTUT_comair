@@ -224,7 +224,6 @@ def job_pre():
 if __name__ == '__main__':
     
     
-
     t = threading.Thread(target = job_pre)
     t.start()
     
@@ -244,5 +243,3 @@ if __name__ == '__main__':
     client02.username_pw_set("IZcJiw4YcQFvDyBno9pd","xxxx")
     client02.connect("thingsboard.cloud", 1883, 60)
     
-        
-        
