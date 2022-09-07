@@ -171,7 +171,7 @@ def job():
     payload = {'Temperature' : evm_temp, 'Humidity':evm_humi, 'comfortair':evm_comfort}
     client01.publish("v1/devices/me/telemetry", json.dumps(payload))
 
-    time.sleep(5)
+    time.sleep(1)
     
     if evm_velocity > 3:
         temp_set = temp_set - 1
