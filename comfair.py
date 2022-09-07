@@ -178,7 +178,7 @@ def job():
     time.sleep(1)
     
     if evm_velocity > 3:
-        if temp_set >= 20 :
+        if temp_set > 20 :
             temp_set = temp_set - 1
             if temp_set == 20:
                 AC_20()
