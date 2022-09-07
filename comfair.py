@@ -46,6 +46,9 @@ def on_message(client, userdata, msg):
     listtopic = data_topic.split("/") 
 
 
+def Fan_on():
+    master.execute(1, cst.WRITE_MULTIPLE_REGISTERS, 1103,output_value=(0, 1))
+    time.sleep(1)
 
 def Fan_init_speed():
     for i in range (1,5):
@@ -238,6 +241,11 @@ def job_pre():
         time.sleep(1)
 
 if __name__ == '__main__':
+
+    AC_On()
+    time.sleep(1)
+    Fan_on()
+    time.sleep(1)
     
     t = threading.Thread(target = job_pre)
     t.start()
