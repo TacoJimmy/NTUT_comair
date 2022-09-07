@@ -159,6 +159,10 @@ def set_speed(temp,humi):
     return (velocity)
 
 def job():
+    global comf_set
+    global temp_set
+    global evm_comfort
+
     RTcond = get_temp()
     num_comfort = comfort_defin(RTcond[0],RTcond[1],3)
     print (num_comfort)
