@@ -191,7 +191,7 @@ def set_speed(temp,humi):
     sequences = [0, 1, 2, 3, 4, 5]
     for i in sequences:
         test = comfort_defin(temp,humi,i)
-        if test[1] <= comf_set:
+        if test[1] < comf_set:
             velocity = i
             break
         else:
