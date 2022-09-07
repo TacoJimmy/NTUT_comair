@@ -3,9 +3,8 @@ import serial
 import modbus_tk.defines as cst
 from modbus_tk import modbus_rtu
 import paho.mqtt.client as mqtt
-import random
 import json  
-import datetime 
+import threading
 
 '''
 @author: NTUT
@@ -39,54 +38,7 @@ def on_message(client, userdata, msg):
     comf_set = data_payload['params']
     #j = json.loads(data)
     
-    RTcond = get_temp()
-    num_comfort = comfort_defin(RTcond[0],RTcond[1],3)
-    print (num_comfort)
-    print (RTcond)
-    print (set_speed(RTcond[0],RTcond[1]))
-    payload = {'Temperature' : evm_temp, 'Humidity':evm_humi, 'comfortair':evm_comfort}
-    client01.publish("v1/devices/me/telemetry", json.dumps(payload))
-
-    time.sleep(5)
     
-    if evm_velocity > 3:
-        temp_set = temp_set - 1
-        if temp_set == 20:
-            AC_20()
-        elif temp_set == 21:
-            AC_21()
-        elif temp_set == 22:
-            AC_22()
-        elif temp_set == 23:
-            AC_23()
-        elif temp_set == 24:
-            AC_24()
-        elif temp_set == 25:
-            AC_25()
-        elif temp_set == 26:
-            AC_26()
-        elif temp_set == 27:
-            AC_27()
-            
-    if evm_velocity < 2:
-        temp_set = temp_set + 1
-        if temp_set == 20:
-            AC_20()
-        elif temp_set == 21:
-            AC_21()
-        elif temp_set == 22:
-            AC_22()
-        elif temp_set == 23:
-            AC_23()
-        elif temp_set == 24:
-            AC_24()
-        elif temp_set == 25:
-            AC_25()
-        elif temp_set == 26:
-            AC_26()
-        elif temp_set == 27:
-            AC_27()
-    time.sleep(5)
     
     
     
@@ -205,8 +157,62 @@ def set_speed(temp,humi):
         
     
     return (velocity)
+
+def job():
+    RTcond = get_temp()
+    num_comfort = comfort_defin(RTcond[0],RTcond[1],3)
+    print (num_comfort)
+    print (RTcond)
+    print (set_speed(RTcond[0],RTcond[1]))
+    payload = {'Temperature' : evm_temp, 'Humidity':evm_humi, 'comfortair':evm_comfort}
+    client01.publish("v1/devices/me/telemetry", json.dumps(payload))
+
+    time.sleep(5)
     
+    if evm_velocity > 3:
+        temp_set = temp_set - 1
+        if temp_set == 20:
+            AC_20()
+        elif temp_set == 21:
+            AC_21()
+        elif temp_set == 22:
+            AC_22()
+        elif temp_set == 23:
+            AC_23()
+        elif temp_set == 24:
+            AC_24()
+        elif temp_set == 25:
+            AC_25()
+        elif temp_set == 26:
+            AC_26()
+        elif temp_set == 27:
+            AC_27()
+            
+    if evm_velocity < 2:
+        temp_set = temp_set + 1
+        if temp_set == 20:
+            AC_20()
+        elif temp_set == 21:
+            AC_21()
+        elif temp_set == 22:
+            AC_22()
+        elif temp_set == 23:
+            AC_23()
+        elif temp_set == 24:
+            AC_24()
+        elif temp_set == 25:
+            AC_25()
+        elif temp_set == 26:
+            AC_26()
+        elif temp_set == 27:
+            AC_27()
+    time.sleep(5)
+
 if __name__ == '__main__':
+    
+
+    t = threading.Thread(target = job)
+    t.start()
     
     Fan_speed(3)
     meter_token = 'IZcJiw4YcQFvDyBno9pd'
